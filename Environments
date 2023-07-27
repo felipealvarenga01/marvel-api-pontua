@@ -1,0 +1,19 @@
+version: '1.0'
+# Configurar este arquivo com as variáveis correspondentes as suas branches. 
+# O cicd pegará as envs da seção que contém o nome da branch que está rodando.
+#
+# IMPORTANTE: Para o nome das variáveis, utilizar todas as letras em maiúsculo!!
+#
+master:
+  USE_MOCK: false
+  PROXY_URL: 'example.com'
+dev:
+  USE_MOCK: false
+  PROXY_URL: 'example.com'
+hml:
+  USE_MOCK: false
+    PROXY_URL: 'example.com'
+qa:
+  USE_MOCK: false
+    PROXY_URL: 'example.com'
+

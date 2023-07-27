@@ -1,0 +1,4 @@
+{
+  "watch": ["./app/**"],
+  "exec": "ts-node -r dotenv/config ./server.ts"
+}
