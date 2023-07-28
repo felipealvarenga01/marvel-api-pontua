@@ -61,6 +61,7 @@ export const TitleCardLogin = styled.h1`
   color: ${({ theme }) => theme.color.blue600};
   line-height: 36.9px;
   margin-bottom: ${({ theme }) => theme.spacing.small}px;
+  letter-spacing: -2.34px;
 
   span {
     color: ${({ theme }) => theme.color.orange500};
@@ -74,6 +75,7 @@ export const DescriptionCardLogin = styled.p`
   color: ${({ theme }) => theme.color.gray500};
   line-height: 20.32px;
   margin-bottom: ${({ theme }) => theme.spacing.micro}px;
+  letter-spacing: -1.04px;
 `;
 
 export const Form = styled.form`
@@ -146,6 +148,10 @@ export const Button = styled.button<{ icon?: string }>`
   }
   :hover {
     opacity: 0.8;
+  }
+  :disabled {
+    background-color: ${({ theme }) => theme.color.gray500};
+    opacity: 1!important;
   }
 `;
 
