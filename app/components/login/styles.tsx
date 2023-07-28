@@ -45,10 +45,11 @@ export const CardContainer = styled.div`
 export const CardLogin = styled.div`
   width: 100%;
   max-width: 380px;
+  min-height: 433px;
   background-color: ${({ theme }) => theme.color.white};
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   padding: 49px 36px 43px;
   border-radius: ${({ theme }) => theme.borderRadius.xxxLarge}px;
@@ -130,9 +131,7 @@ export const InputLogin = styled.input`
   }
 `;
 
-export const IconLogin = styled.img``;
-
-export const Button = styled.button<{ icon?: string }>`
+export const Button = styled.button<{ icon?: string; marginTop?: number }>`
   width: 100%;
   height: 57px;
   background-color: ${({ theme }) => theme.color.blue800};
@@ -140,8 +139,9 @@ export const Button = styled.button<{ icon?: string }>`
   border-radius: ${({ theme }) => theme.borderRadius.xxLarge}px;
   font-size: 24px;
   font-weight: 700;
-  cursor: pointer;
   transition: 0.25s ease all;
+  margin-top: ${({ marginTop }) => (marginTop ? 26 : 0)}px;
+  cursor: pointer;
   -webkit-transition: 0.25s ease all;
   span {
     margin-right: ${({ icon }) => (icon ? 9 : 0)}px;
@@ -151,9 +151,11 @@ export const Button = styled.button<{ icon?: string }>`
   }
   :disabled {
     background-color: ${({ theme }) => theme.color.gray500};
-    opacity: 1!important;
+    opacity: 1 !important;
   }
 `;
+
+export const IconLogin = styled.img``;
 
 export const IconButton = styled.img``;
 
