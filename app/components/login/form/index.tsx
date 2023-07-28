@@ -8,35 +8,52 @@ import {
   Form,
   TitleCardLogin,
 } from '~/components/login/styles';
-import entrar from '../../../assets/entrar.svg';
-import passwordIcon from '../../../assets/password.svg';
-import userIcon from '../../../assets/user.svg';
 
-export default function FormLogin() {
+type InputsProps = {
+  type: string;
+  placeholder: string;
+  icon?: string;
+  marginbottom?: number;
+};
+type FormLoginProps = {
+  inputs?: Array<InputsProps>;
+  title: string;
+  description: string;
+  forgotLink?: boolean;
+  button: {
+    icon?: string;
+    title: string;
+    disabled?: boolean;
+  };
+};
+
+export default function FormLogin({
+  inputs,
+  title,
+  description,
+  forgotLink,
+  button,
+}: FormLoginProps) {
   return (
     <CardContainer>
       <CardLogin>
         <TitleCardLogin>
-          Bem-Vindo<span>.</span>
+          {title}
+          <span>.</span>
         </TitleCardLogin>
-        <DescriptionCardLogin>
-          Informe as suas credenciais de acesso ao portal
-        </DescriptionCardLogin>
+        <DescriptionCardLogin>{description}</DescriptionCardLogin>
         <Form>
-          <InputField
-            type={'email'}
-            placeholder={'Seu melhor e-mail'}
-            icon={userIcon}
-            marginbottom={23}
-          />
-          <InputField
-            type={'password'}
-            placeholder={'Informe sua senha'}
-            icon={passwordIcon}
-            marginbottom={11}
-          />
-          <ButtonLogin icon={entrar} children="entrar" />
-          <ForgotPassword />
+          {inputs &&
+            inputs.map((input) => (
+              <InputField
+                type={input.type}
+                placeholder={input.placeholder}
+                icon={input?.icon}
+                marginbottom={input?.marginbottom}
+              />
+            ))}
+          <ButtonLogin icon={button.icon} children={button.title} disabled={button.disabled}/>
+          {forgotLink && <ForgotPassword />}
         </Form>
       </CardLogin>
     </CardContainer>

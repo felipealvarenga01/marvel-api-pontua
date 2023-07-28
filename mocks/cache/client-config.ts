@@ -11,6 +11,9 @@ const pontuaBrClientConfig: SetupClient = {
     {
       page: 'perfil',
     },
+    {
+      page: 'forgot-password',
+    },
   ],
   featureToggles: {
     shouldRecordFormData: 'sessionStorage',

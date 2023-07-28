@@ -8,13 +8,13 @@ export function InputField({
 }: {
   type: string;
   placeholder: string;
-  icon: string;
+  icon?: string;
   marginbottom?: number;
 }) {
   return (
     <Field marginbottom={marginbottom}>
       <InputLogin type={type} placeholder={placeholder} />
-      <IconLogin src={icon} alt="" />
+      {icon && <IconLogin src={icon} alt="" />}
     </Field>
   );
 }
