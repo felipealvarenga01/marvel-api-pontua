@@ -42,10 +42,12 @@ export const CardContainer = styled.div`
   justify-content: center;
 `;
 
-export const CardLogin = styled.div`
+export const CardLogin = styled.div<{
+  height?: number;
+}>`
   width: 100%;
   max-width: 380px;
-  min-height: 433px;
+  min-height: ${({ height }) => (height ? height : 433)}px;
   background-color: ${({ theme }) => theme.color.white};
   display: flex;
   align-items: flex-start;
@@ -69,13 +71,18 @@ export const TitleCardLogin = styled.h1`
   }
 `;
 
-export const DescriptionCardLogin = styled.p`
+export const DescriptionCardLogin = styled.p<{
+  marginTop?: number;
+  marginBottom?: number;
+}>`
   font-size: 16px;
   font-family: 'Epilogue', sans-serif;
   font-weight: 400;
   color: ${({ theme }) => theme.color.gray500};
   line-height: 20.32px;
-  margin-bottom: ${({ theme }) => theme.spacing.micro}px;
+  margin-top: ${({ marginTop }) => (marginTop ? marginTop : 0)}px;
+  margin-bottom: ${({ theme, marginBottom }) =>
+    marginBottom ? marginBottom : theme.spacing.micro}px;
   letter-spacing: -1.04px;
 `;
 
@@ -163,14 +170,24 @@ export const Button = styled.button<{ icon?: string; marginTop?: number }>`
   }
 `;
 
-export const ButtonAgent = styled(Button)`
-  width: 88px;
-  height: 48px;
+export const ButtonAgent = styled.div`
+  width: 100%;
   font-size: 16px;
   font-weight: 600;
   font-family: 'Inter', sans-serif;
-  background-color: ${({ theme }) => theme.color.blue800};
-  color: ${({ theme }) => theme.color.white};
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  & button {
+    width: 88px;
+    height: 48px;
+    font-size: 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: 'Inter', 'Epilogue', sans-serif;
+    line-height: 24px;
+  }
 `;
 
 export const IconLogin = styled.img``;
