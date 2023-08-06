@@ -24,6 +24,7 @@ type FormLoginProps = {
     icon?: string;
     title: string;
     disabled?: boolean;
+    marginTop?: number;
   };
 };
 
@@ -52,7 +53,12 @@ export default function FormLogin({
                 marginbottom={input?.marginbottom}
               />
             ))}
-          <ButtonLogin icon={button.icon} children={button.title} disabled={button.disabled}/>
+          <ButtonLogin
+            icon={button.icon}
+            children={button.title}
+            disabled={button.disabled}
+            marginTop={button.marginTop}
+          />
           {forgotLink && <ForgotPassword />}
         </Form>
       </CardLogin>
