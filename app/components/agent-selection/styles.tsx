@@ -96,13 +96,17 @@ export const AgentList = styled.ul`
   }
 `;
 
-export const Agent = styled.li`
+export const Agent = styled.li<{
+  agentSelected?: boolean;
+}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   cursor: pointer;
   padding: 10px 14px;
+  background-color: ${({ theme, agentSelected }) =>
+    agentSelected ? theme.color.gray100 : 'transparent'};
 
   :hover {
     background-color: ${({ theme }) => theme.color.gray100};

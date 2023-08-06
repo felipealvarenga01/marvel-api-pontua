@@ -41,6 +41,7 @@ export default function Select({
         <AgentList>
           {options.map((agent) => (
             <Agent
+              agentSelected={verifyAgentSelected(agent.id)}
               key={agent.id}
               onClick={() => {
                 setSelectedAgent({
