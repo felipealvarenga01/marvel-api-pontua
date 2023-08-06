@@ -1,6 +1,11 @@
 import type { CleaveOptions } from 'cleave.js/options';
 
-export type PagesRoutes = 'login' | 'home' | 'perfil' | 'forgot-password';
+export type PagesRoutes =
+  | 'login'
+  | 'home'
+  | 'perfil'
+  | 'forgot-password'
+  | 'agent-selection';
 
 export type I18nCountry = 'pt-BR';
 
