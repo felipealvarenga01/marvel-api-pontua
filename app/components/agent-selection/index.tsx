@@ -1,4 +1,5 @@
 import ButtonAgentSelection from '~/components/agent-selection/button';
+import Select from '~/components/agent-selection/select';
 import {
   CardContainer,
   CardLogin,
@@ -16,23 +17,33 @@ type FormLoginProps = {
     disabled?: boolean;
     marginTop?: number;
   };
+  options: OptionsData[];
+};
+
+type OptionsData = {
+  id: string;
+  name: string;
+  thumbnail: string;
 };
 
 export default function FormAgent({
   title,
   description,
-  button,
+  options = [],
 }: FormLoginProps) {
   return (
     <CardContainer>
-      <CardLogin>
+      <CardLogin height={319}>
         <TitleCardLogin>
           {title}
           <span>.</span>
         </TitleCardLogin>
-        <DescriptionCardLogin>{description}</DescriptionCardLogin>
+        <DescriptionCardLogin marginTop={16} marginBottom={9}>
+          {description}
+        </DescriptionCardLogin>
         <Form>
-          <ButtonAgentSelection title={'Entrar'} button={button}/>
+          <Select placeholder={'Selecione um agente'} options={options} />
+          <ButtonAgentSelection title={'Entrar'} />
         </Form>
       </CardLogin>
     </CardContainer>

@@ -1,5 +1,10 @@
-import { ButtonAgent } from '~/components/login/styles';
+import { Button, ButtonAgent } from '~/components/login/styles';
 
-export default function ButtonAgentSelection({ title }) {
-  return <ButtonAgent> {title}</ButtonAgent>;
+export default function ButtonAgentSelection({ title }: { title: string }) {
+  return (
+    <ButtonAgent>
+      {' '}
+      <Button>{title}</Button>
+    </ButtonAgent>
+  );
 }
