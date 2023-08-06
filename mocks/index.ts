@@ -1,17 +1,18 @@
-import fetchMock from "fetch-mock";
+import fetchMock from 'fetch-mock';
+import enableGetInfoMarvelMock from './api/get-info-marvel';
 
-const shouldUseMock = ():boolean=>{
-    return process.env.USE_MOCK === 'true' || process.env.NODE_ENV === 'test'
-}
-const enableMock = () =>{
-    if(shouldUseMock()){
-        fetchMock.config.fallbackToNetwork = true
-        //TODO colocar aqui todas as funcoes de mock
-    }
-}
+const shouldUseMock = (): boolean => {
+  return process.env.USE_MOCK === 'true' || process.env.NODE_ENV === 'test';
+};
+const enableMock = () => {
+  if (shouldUseMock()) {
+    fetchMock.config.fallbackToNetwork = true;
+    enableGetInfoMarvelMock();
+  }
+};
 
-const disableMock = ()=>{
-    fetchMock.reset()
-}
+const disableMock = () => {
+  fetchMock.reset();
+};
 
-export {enableMock, disableMock, shouldUseMock}
+export { enableMock, disableMock, shouldUseMock };

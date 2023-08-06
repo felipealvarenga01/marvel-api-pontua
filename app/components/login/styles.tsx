@@ -87,6 +87,14 @@ export const Form = styled.form`
   width: 100%;
 `;
 
+export const FormAgent = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
 export const Field = styled.div<{ marginbottom?: number }>`
   border-radius: ${({ theme }) => theme.borderRadius.xxLarge}px;
   border: 1px solid ${({ theme }) => theme.color.gray400};
@@ -153,6 +161,16 @@ export const Button = styled.button<{ icon?: string; marginTop?: number }>`
     background-color: ${({ theme }) => theme.color.gray500};
     opacity: 1 !important;
   }
+`;
+
+export const ButtonAgent = styled(Button)`
+  width: 88px;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  background-color: ${({ theme }) => theme.color.blue800};
+  color: ${({ theme }) => theme.color.white};
 `;
 
 export const IconLogin = styled.img``;

@@ -1,4 +1,3 @@
-import { HttpsProxyAgent } from 'https-proxy-agent';
 import type { Logger } from 'winston';
 
 export type Methods = 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH';
@@ -23,28 +22,28 @@ export enum ReturnType {
 export abstract class RequestBuilder<
   T,
   K extends Record<string, any> | undefined = undefined,
-  C=T,
->{
+  C = T,
+> {
   private readonly headers = new Headers();
-  
+
   private readonly baseUrl: string;
-  
+
   private url = '';
-  
+
   private queryString = '';
-  
+
   private body?: K;
-  
+
   private formData?: K;
-  
+
   private method: Methods = 'GET';
-  
+
   private errorMessage = 'common.errors.badRequest';
-  
+
   private readonly internalLogger: Logger | Console;
-  
+
   private readonly contentType = 'Content-Type';
-  
+
   private static tryGetJson<J>(resp: Response) {
     return new Promise<J>((resolve) => {
       if (resp) {
@@ -57,11 +56,11 @@ export abstract class RequestBuilder<
       }
     });
   }
-  
+
   constructor({
-                baseUrl,
-                logger,
-              }: {
+    baseUrl,
+    logger,
+  }: {
     baseUrl: string;
     logger: Logger | Console;
   }) {
@@ -72,66 +71,66 @@ export abstract class RequestBuilder<
     this.headers.set(this.contentType, 'application/json;charset=UTF-8');
     this.internalLogger = logger;
   }
-  
+
   /** Define se o cabeçalho da requisição conterá `Content-Type application/json;charset=UTF-8` */
   withHeaders(headers: Record<string, string>): RequestBuilder<T, K, C> {
     for (const headerName in headers) {
       this.headers.set(headerName, headers[headerName]);
     }
-    
+
     return this;
   }
-  
+
   /** Define a parte subsequente da URL da requisição */
   withUrl(url: string): RequestBuilder<T, K, C> {
     this.url = url;
-    
+
     return this;
   }
-  
+
   /** Define a query string da requisição */
   withQueryString<
     Q extends
-        | string
+      | string
       | Record<string, string>
       | string[][]
       | URLSearchParams
       | undefined,
   >(query: Q): RequestBuilder<T, K, C> {
     this.queryString = new URLSearchParams(query).toString();
-    
+
     return this;
   }
-  
+
   /** Define o verbo (`method`) da requisição. Padrão `GET`. */
   withMethod(method: Methods): RequestBuilder<T, K, C> {
     this.method = method;
-    
+
     return this;
   }
-  
+
   /** Define o corpo (`body`) da requisição. */
   withBody(body: K): RequestBuilder<T, K, C> {
     this.body = body;
-    
+
     return this;
   }
-  
+
   /** Define envio de FormData no (`body`) da requisição. */
   withFormData(formData: K): RequestBuilder<T, K, C> {
     this.formData = formData;
     this.headers.delete(this.contentType);
-    
+
     return this;
   }
-  
+
   /** Define a mensagem de erro a ser lançada com `throw` caso backend não retorne nenhuma mensagem tratada. */
   withErrorMessage(errorMessage: string): RequestBuilder<T, K, C> {
     this.errorMessage = errorMessage;
-    
+
     return this;
   }
-  
+
   private async checkResponseStatus(
     response: Response,
     returnFullResponse: boolean,
@@ -154,51 +153,45 @@ export abstract class RequestBuilder<
           responseBody,
         )} on try sent body ${JSON.stringify(this.body)}`,
       );
-      
+
       throw new Error(this.errorMessage);
     }
   }
-  
+
   private objectToFormData(obj: K) {
     const formData = new FormData();
     for (const key in obj) {
       formData.append(key, obj[key]);
     }
-    
+
     return formData;
   }
-  
+
   private mountUrl() {
     const slash = this.url ? '/' : '';
     const qs = this.queryString ? '?' : '';
-    
+
     return `${this.baseUrl.replace(/\/$/, '')}${slash}${this.url.replace(
       /^\//,
       '',
     )}${qs}${this.queryString.replace(/^\?/, '')}`;
   }
-  
-  
-  
+
   /** Monta a requisição, dispara para o backend.
    *
    * @returns Uma `promise` de `T`.
    */
-  
-  
+
   async call(): Promise<T>;
-  
+
   async call(
     returnType: ReturnType.full,
   ): Promise<{ response: Response; json: Awaited<T> }>;
-  
+
   async call(returnType?: ReturnType) {
-    // const proxyAgent = new HttpsProxyAgent(
-    //   getProxyURL(),
-    // );
     const returnFullResponse = returnType === ReturnType.full;
-    
-    const init: RequestInit & { agent?: HttpsProxyAgent } = {
+
+    const init: RequestInit = {
       method: this.method,
     };
     if (this.body !== undefined) {
@@ -207,11 +200,9 @@ export abstract class RequestBuilder<
     if (this.formData !== undefined) {
       init.body = this.objectToFormData(this.formData);
     }
-    // if (process.env.NODE_ENV !== 'production') {
-    //   init.agent = proxyAgent;
-    // }
+
     init.headers = this.headers;
-    
+
     let response: Response;
     try {
       this.internalLogger.info(
@@ -222,16 +213,15 @@ export abstract class RequestBuilder<
       this.internalLogger.error(`Error on fetch ${error}`);
       throw new Error(this.errorMessage);
     }
-    
+
     await this.checkResponseStatus(response, returnFullResponse);
-    
+
     const json = await RequestBuilder.tryGetJson<T>(response);
-    
+
     if (returnFullResponse) {
       return { response, json };
     }
-    
+
     return json;
   }
-  
 }
