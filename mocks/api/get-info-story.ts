@@ -190,7 +190,7 @@ const enableMock = () => {
   });
 
   fetchMock.mock({
-    name: 'get-story-by-id',
+    name: 'get-story-by-id-with-thumbnail',
     url: new RegExp('/story/story-id'),
     method: 'GET',
     response: () => {

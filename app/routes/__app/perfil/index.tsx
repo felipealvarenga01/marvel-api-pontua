@@ -20,7 +20,7 @@ import {
 } from '~/components/perfil/styles';
 import Tabs from '~/components/tabs/tabs';
 import { useTranslation } from '~/hooks/i18n';
-import { getInfoHeroById } from '~/server/application/get-info-heroes/get-info-hero-by-id.server';
+import { getInfoHeroById } from '~/server/application/get-info-hero/get-info-hero-by-id.server';
 
 type LoaderData = {
   name: string;
@@ -34,6 +34,7 @@ type LoaderData = {
 
 const visaoGeral = 'visao-geral';
 const windowRef = typeof window !== 'undefined' ? window : null;
+
 export async function loader(params: LoaderArgs) {
   const url = new URL(params.request.url).search;
   const searchParams = new URLSearchParams(url);
@@ -44,8 +45,6 @@ export async function loader(params: LoaderArgs) {
 
   return getInfoHeroById({ urlPath: `/characters/${agentId}` });
 }
-
-
 
 export default function Perfil() {
   const { name, description, thumbnail, comics, stories, series, events } =

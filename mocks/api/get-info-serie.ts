@@ -134,7 +134,6 @@ const mockHeroSerie = {
 
 const enableMock = () => {
   fetchMock.mock({
-    name: 'get-serie-by-id',
     url: new RegExp('/serie/serie-id'),
     method: 'GET',
     response: () => {

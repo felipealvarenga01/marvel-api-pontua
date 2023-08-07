@@ -17,7 +17,8 @@ import {
   HomeTitleDivider,
 } from '~/components/home/styles';
 import { useTranslation } from '~/hooks/i18n';
-import { getInfoHeroes } from '~/server/application/get-info-heroes/get-info-heroes.server';
+import { getInfoHeroes } from "~/server/application/get-info-hero/get-info-heroes.server";
+
 
 type LoaderData = {
   id: string;

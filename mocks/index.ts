@@ -1,9 +1,9 @@
 import fetchMock from 'fetch-mock';
 import enableGetComicByIdMock from './api/get-info-comic';
-import enableGetEventsByIdMock from './api/get-info-event';
+import enableGetEventByIdMock from './api/get-info-event';
 import enableGetInfoMarvelMock from './api/get-info-marvel';
-import enableGetSeriesByIdMock from './api/get-info-serie';
-import enableGetStoriesByIdMock from './api/get-info-story';
+import enableGetSerieByIdMock from './api/get-info-serie';
+import enableGetStoryByIdMock from './api/get-info-story';
 
 const shouldUseMock = (): boolean => {
   return process.env.USE_MOCK === 'true' || process.env.NODE_ENV === 'test';
@@ -13,9 +13,9 @@ const enableMock = () => {
     fetchMock.config.fallbackToNetwork = true;
     enableGetInfoMarvelMock();
     enableGetComicByIdMock();
-    enableGetEventsByIdMock();
-    enableGetSeriesByIdMock();
-    enableGetStoriesByIdMock();
+    enableGetEventByIdMock();
+    enableGetSerieByIdMock();
+    enableGetStoryByIdMock();
   }
 };
 

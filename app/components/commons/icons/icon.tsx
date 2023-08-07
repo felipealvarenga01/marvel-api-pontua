@@ -60,10 +60,6 @@ const KTIcon: React.FC<Props> = ({ iconName }) => {
           </svg>,
         );
         break;
-
-      default:
-        setIcon(false);
-        break;
     }
   }, []);
 

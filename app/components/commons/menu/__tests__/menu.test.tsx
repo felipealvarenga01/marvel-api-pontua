@@ -1,6 +1,6 @@
 import { renderRemix } from 'tests/remix-stub';
 import { expect, it } from 'vitest';
-import type {ListMenuProperties, ListMenuProperties } from '../menu';
+import type { ListMenuProperties } from '../menu';
 import Menu from '../menu';
 
 describe('Renderização de Menu', () => {
@@ -11,10 +11,8 @@ describe('Renderização de Menu', () => {
   } as ListMenuProperties;
 
   it('Teste de Menu', () => {
-    const { container, debug } = renderRemix(
-        <Menu item={item} open={false} />
-    );
-    debug(container)
+    const { container, debug } = renderRemix(<Menu item={item} />);
+    debug(container);
     const menu = container.querySelector('div') as HTMLElement;
 
     expect(menu).toBeInTheDocument();

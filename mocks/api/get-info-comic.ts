@@ -249,7 +249,6 @@ const mockHeroComic = {
 
 const enableMock = () => {
   fetchMock.mock({
-    name: 'get-comic-by-id',
     url: new RegExp('/comic/comic-id'),
     method: 'GET',
     response: () => {

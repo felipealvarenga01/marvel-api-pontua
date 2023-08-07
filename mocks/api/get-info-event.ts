@@ -143,7 +143,6 @@ const mockHeroEvent = {
 
 const enableMock = () => {
   fetchMock.mock({
-    name: 'get-event-by-id',
     url: new RegExp('/event/event-id'),
     method: 'GET',
     response: () => {

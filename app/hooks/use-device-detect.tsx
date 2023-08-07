@@ -27,11 +27,11 @@ export function DeviceDetectProvider({ children }: React.PropsWithChildren) {
 
   const [isMobile, setIsMobile] = useState<boolean>(Boolean(data?.isMobile));
   const isIOS = useRef(
-      typeof window !== 'undefined' &&
+    typeof window !== 'undefined' &&
       /iPad|iPhone|iPod/.test(navigator.userAgent),
   ).current;
   const isAndroid = useRef(
-      typeof window !== 'undefined' && /Android/.test(navigator.userAgent),
+    typeof window !== 'undefined' && /Android/.test(navigator.userAgent),
   ).current;
 
   const handleResize = useCallback(() => {
@@ -50,9 +50,9 @@ export function DeviceDetectProvider({ children }: React.PropsWithChildren) {
   }, []);
 
   return (
-      <DeviceDetectContext.Provider value={{ isMobile, isIOS, isAndroid }}>
-        {children}
-      </DeviceDetectContext.Provider>
+    <DeviceDetectContext.Provider value={{ isMobile, isIOS, isAndroid }}>
+      {children}
+    </DeviceDetectContext.Provider>
   );
 }
 
