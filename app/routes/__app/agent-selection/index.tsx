@@ -3,7 +3,7 @@ import FormAgent from '~/components/agent-selection';
 import HeaderLogin from '~/components/login/header-login';
 import ImgLogin from '~/components/login/img-main';
 import { LoginBackground, LoginContainer } from '~/components/login/styles';
-import { getNameThumbnailHero } from '~/server/application/get-info-heroes/get-name-thumbnail-hero.server';
+import { getNameThumbnailHero } from '~/server/application/get-info-hero/get-name-thumbnail-hero.server';
 
 type LoaderData = {
   id: string;

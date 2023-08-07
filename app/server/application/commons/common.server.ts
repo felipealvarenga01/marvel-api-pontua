@@ -7,6 +7,6 @@ export async function getAppRouteServer({ request }: { request: Request }) {
       redirect,
       request,
     });
-  
+
   return serverAppRouteController.returnSpread();
 }

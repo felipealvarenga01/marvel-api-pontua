@@ -38,7 +38,6 @@
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.1.1",
-    "@phosphor-icons/react": "^2.0.10",
     "@remix-run/dev": "^1.18.1",
     "@remix-run/express": "^1.18.1",
     "@remix-run/node": "^1.18.1",

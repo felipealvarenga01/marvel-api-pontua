@@ -22,13 +22,13 @@ export async function createSession(
   const session = await sessionStorage.getSession(
     request.headers.get('Cookie'),
   );
-  
+
   Object.entries(params).forEach(([key, value]) => {
     if (value && key) {
       session.set(key, value);
     }
   });
-  
+
   return {
     headers: { 'Set-Cookie': await sessionStorage.commitSession(session) },
   };
@@ -38,7 +38,7 @@ export async function getSession(request: Request) {
   const session = await sessionStorage.getSession(
     request.headers.get('Cookie'),
   );
-  
+
   return session.data;
 }
 
@@ -50,11 +50,11 @@ export async function updateSessionParam(
   const session = await sessionStorage.getSession(
     request.headers.get('Cookie'),
   );
-  
+
   if (value) {
     session.set(key, value);
   }
-  
+
   return {
     headers: { 'Set-Cookie': await sessionStorage.commitSession(session) },
   };

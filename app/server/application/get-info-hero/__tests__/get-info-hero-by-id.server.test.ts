@@ -1,5 +1,5 @@
 import { vi } from 'vitest';
-import { getInfoHeroById } from '~/server/application/get-info-heroes/get-info-hero-by-id.server';
+import { getInfoHeroById } from '~/server/application/get-info-hero/get-info-hero-by-id.server';
 import { mockHero } from '../../../../../mocks/api/get-info-marvel';
 import * as getInfoMarvel from '../../../infra/apis/get-info-marvel';
 
@@ -13,4 +13,3 @@ it('Retorne as informações de um heroi pelo id', async () => {
   expect(getInfoMarvelMock).toBeCalledTimes(1);
   expect(hero.name).toEqual('3-D Man');
 });
-

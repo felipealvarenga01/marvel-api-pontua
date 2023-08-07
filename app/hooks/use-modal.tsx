@@ -25,21 +25,21 @@ const ModalProvider = ({ children: providerChildren }: OpenModalProps) => {
   );
   const [currentHasPadding, setCurrentHasPadding] = useState(true);
   const [currentCanCloseBackdrop, setCurrentCanCloseBackdrop] = useState(true);
-  
+
   function close() {
     setCurrentChildren(null);
   }
-  
+
   function open({
-                  hasPadding = true,
-                  children,
-                  canCloseBackdrop = true,
-                }: OpenModalProps) {
+    hasPadding = true,
+    children,
+    canCloseBackdrop = true,
+  }: OpenModalProps) {
     setCurrentChildren(children);
     setCurrentHasPadding(hasPadding);
     setCurrentCanCloseBackdrop(canCloseBackdrop);
   }
-  
+
   return (
     <ModalContext.Provider
       value={{

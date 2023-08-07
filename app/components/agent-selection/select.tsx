@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { FiCheck, FiChevronDown, FiUser } from 'react-icons/fi';
+import { useEffect, useState } from 'react';
+import { FiCheck, FiChevronDown, FiChevronUp, FiUser } from 'react-icons/fi';
 import AvatarContainer from '~/components/agent-selection/avatar';
 import {
   Agent,
@@ -12,9 +12,10 @@ import {
 
 export default function Select({
   options,
+  agent,
 }: {
-  placeholder: string;
   options: any[];
+  agent: (agent: number) => void;
 }) {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedAgent, setSelectedAgent] = useState({
@@ -27,6 +28,12 @@ export default function Select({
     return id == selectedAgent.id;
   };
 
+  useEffect(() => {
+    if (selectedAgent.id !== 0) {
+      agent(selectedAgent.id);
+    }
+  }, [selectedAgent]);
+
   return (
     <DivContainerSelect>
       <SelectedAgent onClick={() => setShowOptions(!showOptions)}>
@@ -35,7 +42,7 @@ export default function Select({
           <span>{selectedAgent.name}</span>
         </SelectedAgentContainer>
 
-        <FiChevronDown size={20} />
+        {showOptions ? <FiChevronUp size={20} /> : <FiChevronDown size={20} />}
       </SelectedAgent>
       {showOptions && (
         <AgentList>
