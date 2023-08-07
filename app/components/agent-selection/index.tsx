@@ -1,3 +1,7 @@
+import type { ActionArgs } from '@remix-run/node';
+import { useNavigate, useNavigation, useSubmit } from '@remix-run/react';
+import type { FormEvent } from 'react';
+import { useState } from 'react';
 import ButtonAgentSelection from '~/components/agent-selection/button';
 import Select from '~/components/agent-selection/select';
 import {
@@ -31,6 +35,16 @@ export default function FormAgent({
   description,
   options = [],
 }: FormLoginProps) {
+  const navigate = useNavigate();
+  const [agentSelectedId, setAgentSelectedId] = useState<number>();
+
+  function alguma(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (agentSelectedId) {
+      navigate(`/perfil?agentId=${agentSelectedId}`);
+    }
+  }
+
   return (
     <CardContainer>
       <CardLogin height={319}>
@@ -41,8 +55,11 @@ export default function FormAgent({
         <DescriptionCardLogin marginTop={16} marginBottom={9}>
           {description}
         </DescriptionCardLogin>
-        <Form>
-          <Select placeholder={'Selecione um agente'} options={options} />
+        <Form onSubmit={(e) => alguma(e)}>
+          <Select
+            options={options}
+            agent={(agent) => setAgentSelectedId(agent)}
+          />
           <ButtonAgentSelection title={'Entrar'} />
         </Form>
       </CardLogin>

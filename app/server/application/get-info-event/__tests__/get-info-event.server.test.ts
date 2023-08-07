@@ -1,15 +1,15 @@
 import { it, vi } from 'vitest';
-import { getInfoEventById } from '~/server/application/get-info-events/get-info-events.server';
+import { getInfoEventById } from '~/server/application/get-info-event/get-info-event.server';
 import * as getInfoMarvel from '~/server/infra/apis/get-info-marvel';
-import { mockHeroEvents } from '../../../../../mocks/api/get-info-event';
+import { mockHeroEvent } from '../../../../../mocks/api/get-info-event';
 
 describe('Busca de informações de Events dos herois marvel', () => {
   it('Espero que retorne as informações dos events por id', async () => {
     const getInfoMarvelMock = vi
       .spyOn(getInfoMarvel, 'getInfoMarvel')
-      .mockReturnValue(mockHeroEvents as any);
+      .mockReturnValue(mockHeroEvent as any);
 
-    const response = await getInfoEventById({ urlPath: 'events/events-id' });
+    const response = await getInfoEventById({ urlPath: 'event/event-id' });
 
     expect(getInfoMarvelMock).toBeCalledTimes(1);
     expect(response.title).toEqual('Secret Invasion');

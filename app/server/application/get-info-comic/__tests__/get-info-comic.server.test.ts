@@ -1,15 +1,15 @@
 import { it, vi } from 'vitest';
-import { getInfoComicById } from '~/server/application/get-info-comics/get-info-comics.server';
+import { getInfoComicById } from '~/server/application/get-info-comic/get-info-comic.server';
 import * as getInfoMarvel from '~/server/infra/apis/get-info-marvel';
-import { mockHeroComics } from '../../../../../mocks/api/get-info-comic';
+import { mockHeroComic } from '../../../../../mocks/api/get-info-comic';
 
 describe('Busca de informações de Comics dos herois marvel', () => {
   it('Espero que retorne as informações dos comics por id', async () => {
     const getInfoMarvelMock = vi
       .spyOn(getInfoMarvel, 'getInfoMarvel')
-      .mockReturnValue(mockHeroComics as any);
+      .mockReturnValue(mockHeroComic as any);
 
-    const response = await getInfoComicById({ urlPath: 'comics/comic-id' });
+    const response = await getInfoComicById({ urlPath: 'comic/comic-id' });
 
     expect(getInfoMarvelMock).toBeCalledTimes(1);
     expect(response.title).toEqual('Avengers: The Initiative (2007) #19');

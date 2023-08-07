@@ -1,5 +1,4 @@
-import { useDeviceDetect } from '~/hooks/use-device-detect';
-import { Header } from './header-styles';
+import { Header, LeftRow, RightRow } from './header-styles';
 
 type User = {
   logo: string;
@@ -11,7 +10,10 @@ type MainHeaderProps = {
 };
 
 export const MainHeader: React.FC<MainHeaderProps> = () => {
-  const { isMobile } = useDeviceDetect();
-
-  return <Header />;
+  return (
+    <Header>
+      <LeftRow>teste</LeftRow>
+      <RightRow>teste</RightRow>
+    </Header>
+  );
 };

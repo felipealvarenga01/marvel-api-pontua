@@ -1,49 +1,67 @@
 import { useEffect, useState } from 'react';
+import { GridContainer } from '~/components/commons/content/content';
+import {
+  EventsContainer,
+  EventsInfo,
+  EventsInfoDescription,
+  EventsInfoTitle,
+  EventsThumbnail,
+} from '~/components/perfil/styles';
 import { TabCard } from '~/components/tabs/tabs-styles';
 import { ClientRequestBuilder } from '~/server/infra/request-builder';
 import loading from '../../assets/icon-1.1s-46px.gif';
 
-type CardComicsProps = {
-  comics: Array<{ resourceURI: string; name: string }>;
+type CardEventsProps = {
+  events: Array<{ resourceURI: string; name: string }>;
 };
 
-type ComicsProps = {
+type EventsProps = {
   title: string;
   description: string | null;
   thumbnail: string;
+  startDate: string;
+  endDate: string;
 };
 
-export default function CardComics({ comics }: CardComicsProps) {
-  const [comicsInfos, setComicInfos] = useState<ComicsProps[]>(); // Initialize with an empty array
+const windowRef = typeof window !== 'undefined' ? window : null;
+
+export default function CardEvents({ events }: CardEventsProps) {
+  const [eventsInfos, setEventsInfos] = useState<EventsProps[]>(); // Initialize with an empty array
   const [loadingData, setLoadingData] = useState(false);
 
-  async function fetchComicData(comicId: string) {
+  async function fetchEventData(eventId: string) {
     // @ts-ignore
     return (
       new ClientRequestBuilder<unknown>({
-        baseUrl: '/api/get-info-comic',
+        baseUrl: '/api/get-info-event',
       })
         .withMethod('PUT')
         // @ts-ignore
-        .withBody({ comicId })
+        .withBody({ eventId })
         .call()
     );
   }
 
-  async function loadComics() {
+  async function loadEvents() {
     setLoadingData(true);
-    const data: ComicsProps[] = [];
-    for (const item of comics) {
-      const [, comicId] = item.resourceURI.split('/comics/'); // Extract the comic ID from resourceURI
-      data.push((await fetchComicData(comicId)) as ComicsProps);
+    const storageData = windowRef?.localStorage.getItem('events');
+    if (storageData) {
+      setEventsInfos(JSON.parse(storageData));
+      setLoadingData(false);
     }
-    setComicInfos(data);
+    const data: EventsProps[] = [];
+    for (const item of events) {
+      const [, eventId] = item.resourceURI.split('/events/'); // Extract the comic ID from resourceURI
+      data.push((await fetchEventData(eventId)) as EventsProps);
+    }
+    setEventsInfos(data);
+    windowRef?.localStorage.setItem('events', JSON.stringify(data));
     setLoadingData(false);
   }
 
   useEffect(() => {
-    loadComics().then();
-  }, [loadComics]);
+    loadEvents().then();
+  }, []);
 
   return (
     <TabCard>
@@ -56,16 +74,23 @@ export default function CardComics({ comics }: CardComicsProps) {
           </p>
         </>
       ) : (
-        <>
-          {comicsInfos &&
-            comicsInfos.map((comicInfo, index) => (
-              <div key={index}>
-                <img src={comicInfo.thumbnail} alt={comicInfo.title} />
-                <h3>{comicInfo.title}</h3>
-                <p>{comicInfo.description}</p>
-              </div>
+        <GridContainer>
+          {eventsInfos &&
+            eventsInfos.map((eventInfo, index) => (
+              <EventsContainer key={index}>
+                <EventsThumbnail
+                  src={eventInfo.thumbnail}
+                  alt={eventInfo.title}
+                />
+                <EventsInfo>
+                  <EventsInfoTitle>{eventInfo.title}</EventsInfoTitle>
+                  <EventsInfoDescription>
+                    {eventInfo.description}
+                  </EventsInfoDescription>
+                </EventsInfo>
+              </EventsContainer>
             ))}
-        </>
+        </GridContainer>
       )}
     </TabCard>
   );

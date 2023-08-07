@@ -2,13 +2,14 @@ import styled from '@emotion/styled';
 import { mq } from '~/hooks/use-theme';
 
 export const Header = styled.header`
-  height: ${({ theme }) => theme.size.largeX}px;
+  height: ${({ theme }) => theme.size.large}px;
   padding: ${({ theme }) => `${theme.spacing.small}px ${theme.spacing.semi}px`};
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid #ebeff2;
   ${() =>
     mq({
       justifyContent: ['center', 'space-between'],

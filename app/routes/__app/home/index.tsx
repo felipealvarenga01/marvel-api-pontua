@@ -1,4 +1,21 @@
 import { useLoaderData } from '@remix-run/react';
+import { Container, Content } from '~/components/commons/content/content';
+import { MainHeader } from '~/components/commons/header/main-header';
+import { Layout } from '~/components/commons/layout/layout';
+import type { ListMenuProperties } from '~/components/commons/sidebar/sidebar';
+import { Sidebar } from '~/components/commons/sidebar/sidebar';
+import {
+  HeroCard,
+  HeroDescription,
+  HeroImage,
+  HeroInfo,
+  HeroName,
+  HeroThumbnail,
+  HeroesContainer,
+  HomeSubtitle,
+  HomeTitle,
+  HomeTitleDivider,
+} from '~/components/home/styles';
 import { useTranslation } from '~/hooks/i18n';
 import { getInfoHeroes } from '~/server/application/get-info-heroes/get-info-heroes.server';
 
@@ -10,29 +27,52 @@ type LoaderData = {
 };
 
 export async function loader() {
-  return await getInfoHeroes({ urlPath: '/characters' });
+  return getInfoHeroes({ urlPath: '/characters' });
 }
 
 export default function Home() {
   const loaderData = useLoaderData() as LoaderData[];
   const { translate } = useTranslation('pages.home');
+  const menuList: ListMenuProperties[] = [
+    {
+      title: 'Home',
+      path: '/home',
+      icon: 'dashboard',
+    },
+    {
+      title: 'Perfil',
+      path: '/perfil',
+      icon: 'user',
+    },
+  ];
 
   return (
-    <>
-      <h1>{translate('subtitle')}</h1>;
-      <div>
-        {loaderData &&
-          loaderData.map((hero, index) => (
-            <div key={index}>
-              <div>
-                <img src={hero.thumbnail} alt={hero.name} />
-                <h2>{hero.name}</h2>
-              </div>
-
-              <p>{hero.description}</p>
-            </div>
-          ))}
-      </div>
-    </>
+    <Layout>
+      <Sidebar menuList={menuList} />
+      <Content>
+        <MainHeader />
+        <Container>
+          <HomeTitle>
+            {translate('title')}
+            <HomeTitleDivider> / </HomeTitleDivider>
+            <HomeSubtitle>{translate('subtitle')}</HomeSubtitle>
+          </HomeTitle>
+          <HeroesContainer>
+            {loaderData &&
+              loaderData.map((hero, index) => (
+                <HeroCard key={index} className={`card-${index}`}>
+                  <HeroThumbnail>
+                    <HeroImage src={hero.thumbnail} alt={hero.name} />
+                  </HeroThumbnail>
+                  <HeroInfo>
+                    <HeroName>{hero.name}</HeroName>
+                    <HeroDescription>{hero.description}</HeroDescription>
+                  </HeroInfo>
+                </HeroCard>
+              ))}
+          </HeroesContainer>
+        </Container>
+      </Content>
+    </Layout>
   );
 }

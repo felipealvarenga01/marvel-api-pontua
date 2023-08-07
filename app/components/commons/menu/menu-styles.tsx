@@ -2,23 +2,32 @@ import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 
-export const SidebarLink = styled(NavLink)<{
-  open: boolean;
-}>`
+export const SidebarLink = styled(NavLink)`
   display: flex;
   flex-direction: row;
   width: 100%;
   height: ${({ theme }) => theme.size.medium}px;
-  padding: ${({ theme }) => `${theme.spacing.none}px ${theme.spacing.tiny}px`};
+  padding: ${({ theme }) => `${theme.spacing.none}px ${theme.spacing.small}px`};
   color: ${({ theme }) => theme.color.gray500};
   transition-duration: 300ms;
 
   & > div > i {
     font-size: ${({ theme }) => theme.size.standard}px;
   }
+  & > div > svg {
+    width: 20px;
+      height: 20px;
+  }
 
   &.active span {
-    color: ${({ theme }) => theme.color.primary};
+    color: ${({ theme }) => theme.color.orange500};
+  }
+
+  &.active > div {
+    background-color: ${({ theme }) => theme.color.graybackground};
+  }
+  &.active svg {
+    stroke: ${({ theme }) => theme.color.orange500};
   }
 `;
 
@@ -33,7 +42,7 @@ export const Hover = styled.div`
   transition-duration: 300ms;
 
   &:hover {
-    background-color: ${({ theme }) => theme.color.primaryLight};
+    background-color: ${({ theme }) => theme.color.graybackground};
   }
 `;
 
@@ -56,10 +65,10 @@ export const HoverSubMenu = styled.div<{ open: boolean }>`
 
 export const SidebarLabel = styled(motion.span)`
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 24px;
-  letter-spacing: 2px;
-  color: ${({ theme }) => theme.color.gray800};
+  letter-spacing: -0.39px;
+  color: ${({ theme }) => theme.color.black};
   white-space: nowrap;
   margin-left: ${({ theme }) => theme.spacing.tiny}px;
 `;

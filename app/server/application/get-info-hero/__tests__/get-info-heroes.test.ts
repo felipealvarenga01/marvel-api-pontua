@@ -1,5 +1,5 @@
 import { vi } from 'vitest';
-import { getInfoHeroes } from '~/server/application/get-info-heroes/get-info-heroes.server';
+import { getInfoHeroes } from '~/server/application/get-info-hero/get-info-heroes.server';
 import { mockHeroes } from '../../../../../mocks/api/get-info-marvel';
 import * as getInfoMarvel from '../../../infra/apis/get-info-marvel';
 

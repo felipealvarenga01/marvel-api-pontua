@@ -1,49 +1,66 @@
 import { useEffect, useState } from 'react';
+import { GridContainer } from '~/components/commons/content/content';
+import {
+  SeriesContainer,
+  SeriesInfo,
+  SeriesInfoDescription,
+  SeriesInfoTitle,
+  SeriesThumbnail,
+} from '~/components/perfil/styles';
 import { TabCard } from '~/components/tabs/tabs-styles';
 import { ClientRequestBuilder } from '~/server/infra/request-builder';
 import loading from '../../assets/icon-1.1s-46px.gif';
 
-type CardComicsProps = {
-  comics: Array<{ resourceURI: string; name: string }>;
+type CardSeriesProps = {
+  series: Array<{ resourceURI: string; name: string }>;
 };
 
-type ComicsProps = {
+type SeriesProps = {
   title: string;
   description: string | null;
   thumbnail: string;
+  startDate: string;
+  endDate: string;
 };
 
-export default function CardComics({ comics }: CardComicsProps) {
-  const [comicsInfos, setComicInfos] = useState<ComicsProps[]>(); // Initialize with an empty array
+const windowRef = typeof window !== 'undefined' ? window : null;
+export default function CardSeries({ series }: CardSeriesProps) {
+  const [seriesInfos, setSeriesInfos] = useState<SeriesProps[]>();
   const [loadingData, setLoadingData] = useState(false);
 
-  async function fetchComicData(comicId: string) {
+  async function fetchSerieData(serieId: string) {
     // @ts-ignore
     return (
       new ClientRequestBuilder<unknown>({
-        baseUrl: '/api/get-info-comic',
+        baseUrl: '/api/get-info-serie',
       })
         .withMethod('PUT')
         // @ts-ignore
-        .withBody({ comicId })
+        .withBody({ serieId })
         .call()
     );
   }
 
-  async function loadComics() {
+  async function loadSeries() {
     setLoadingData(true);
-    const data: ComicsProps[] = [];
-    for (const item of comics) {
-      const [, comicId] = item.resourceURI.split('/comics/'); // Extract the comic ID from resourceURI
-      data.push((await fetchComicData(comicId)) as ComicsProps);
+    const storageData = windowRef?.localStorage.getItem('series');
+    if (storageData) {
+      setSeriesInfos(JSON.parse(storageData));
+      setLoadingData(false);
     }
-    setComicInfos(data);
+    const data: SeriesProps[] = [];
+    for (const item of series) {
+      const [, serieId] = item.resourceURI.split('/series/');
+      data.push((await fetchSerieData(serieId)) as SeriesProps);
+    }
+    setSeriesInfos(data);
+    windowRef?.localStorage.setItem('series', JSON.stringify(data));
     setLoadingData(false);
   }
 
   useEffect(() => {
-    loadComics().then();
-  }, [loadComics]);
+    loadSeries().then();
+  }, []);
 
   return (
     <TabCard>
@@ -56,16 +73,23 @@ export default function CardComics({ comics }: CardComicsProps) {
           </p>
         </>
       ) : (
-        <>
-          {comicsInfos &&
-            comicsInfos.map((comicInfo, index) => (
-              <div key={index}>
-                <img src={comicInfo.thumbnail} alt={comicInfo.title} />
-                <h3>{comicInfo.title}</h3>
-                <p>{comicInfo.description}</p>
-              </div>
+        <GridContainer>
+          {seriesInfos &&
+            seriesInfos.map((serieInfo, index) => (
+              <SeriesContainer key={index}>
+                <SeriesThumbnail
+                  src={serieInfo.thumbnail}
+                  alt={serieInfo.title}
+                />
+                <SeriesInfo>
+                  <SeriesInfoTitle>{serieInfo.title}</SeriesInfoTitle>
+                  <SeriesInfoDescription>
+                    {serieInfo.description}
+                  </SeriesInfoDescription>
+                </SeriesInfo>
+              </SeriesContainer>
             ))}
-        </>
+        </GridContainer>
       )}
     </TabCard>
   );

@@ -13,6 +13,7 @@ export const DivContainerSelect = styled.div`
   border: 1px solid var(--gray-300, #d0d5dd);
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   margin-bottom: 16px;
+  cursor: pointer;
 `;
 
 export const DivContainerAvatar = styled.div`
@@ -69,13 +70,13 @@ export const AgentList = styled.ul`
   position: absolute;
   top: 52px;
   left: 0;
-  max-height: 300px;
   overflow-y: scroll;
   box-shadow: 0px 4px 6px -2px rgba(16, 24, 40, 0.03),
     0px 12px 16px -4px rgba(16, 24, 40, 0.08);
   border: 1px solid ${({ theme }) => theme.color.gray100};
   border-radius: 8px;
   background-color: ${({ theme }) => theme.color.white};
+  max-height: 180px;
 
   ::-webkit-scrollbar {
     width: 5px;

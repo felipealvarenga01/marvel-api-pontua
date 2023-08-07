@@ -181,8 +181,8 @@ const mockHeroStoryById = {
 
 const enableMock = () => {
   fetchMock.mock({
-    name: 'get-stories-by-id',
-    url: new RegExp('/stories/stories-id'),
+    name: 'get-story-by-id',
+    url: new RegExp('/story/story-id'),
     method: 'GET',
     response: () => {
       return mockHeroStoryById;
@@ -190,8 +190,8 @@ const enableMock = () => {
   });
 
   fetchMock.mock({
-    name: 'get-stories-by-id',
-    url: new RegExp('/stories/stories-id'),
+    name: 'get-story-by-id',
+    url: new RegExp('/story/story-id'),
     method: 'GET',
     response: () => {
       return mockHeroStoryByIdWithThumbnail;

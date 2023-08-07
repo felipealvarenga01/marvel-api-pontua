@@ -1,15 +1,18 @@
 import { it, vi } from 'vitest';
 import { getInfoStoryById } from '~/server/application/get-info-story/get-info-story.server';
 import * as getInfoMarvel from '~/server/infra/apis/get-info-marvel';
-import { mockHeroStoryById, mockHeroStoryByIdWithThumbnail } from "../../../../../mocks/api/get-info-story";
+import {
+  mockHeroStoryById,
+  mockHeroStoryByIdWithThumbnail,
+} from '../../../../../mocks/api/get-info-story';
 
-describe('Busca de informações de Stories dos herois marvel', () => {
-  it('Espero que retorne as informações dos stories por id', async () => {
+describe('Busca de informações de Story do heroi marvel', () => {
+  it('Espero que retorne as informações da story por id', async () => {
     const getInfoMarvelMock = vi
       .spyOn(getInfoMarvel, 'getInfoMarvel')
       .mockReturnValue(mockHeroStoryByIdWithThumbnail as any);
 
-    const response = await getInfoStoryById({ urlPath: 'stories/stories-id' });
+    const response = await getInfoStoryById({ urlPath: 'story/story-id' });
 
     expect(getInfoMarvelMock).toBeCalledTimes(1);
     expect(response.title).toEqual('Cover #19947');
@@ -19,12 +22,12 @@ describe('Busca de informações de Stories dos herois marvel', () => {
     );
   });
 
-  it('Espero que retorne as informações dos stories por id', async () => {
+  it('Espero que retorne as informações da story por id sem thumbnail', async () => {
     const getInfoMarvelMock = vi
       .spyOn(getInfoMarvel, 'getInfoMarvel')
       .mockReturnValue(mockHeroStoryById as any);
 
-    const response = await getInfoStoryById({ urlPath: 'stories/stories-id' });
+    const response = await getInfoStoryById({ urlPath: 'story/story-id' });
 
     expect(getInfoMarvelMock).toBeCalledTimes(1);
     expect(response.title).toEqual('Cover #19947');

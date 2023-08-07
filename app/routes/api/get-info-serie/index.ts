@@ -1,6 +1,6 @@
 import type { ActionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { getInfoSerieById } from '~/server/application/get-info-series/get-info-serie.server';
+import { getInfoSerieById } from '~/server/application/get-info-serie/get-info-serie.server';
 
 export function loader() {
   return json('ok');

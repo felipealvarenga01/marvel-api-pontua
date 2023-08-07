@@ -1,27 +1,22 @@
-import {renderRemix} from 'tests/remix-stub';
-import {expect, it} from 'vitest';
-import Menu, {ListMenuProperties} from '../menu';
-import {ThemeProviderOmni} from "~/hooks/use-theme";
+import { renderRemix } from 'tests/remix-stub';
+import { expect, it } from 'vitest';
+import type {ListMenuProperties, ListMenuProperties } from '../menu';
+import Menu from '../menu';
 
 describe('Renderização de Menu', () => {
-const item = {
-        title: "Primeiros Passos",
-        path: '/primeiros-passos',
-        icon: 'teacher',
-    } as ListMenuProperties
+  const item = {
+    title: 'menu',
+    path: '/primeiros-passos',
+    icon: 'user',
+  } as ListMenuProperties;
 
-    it('Teste de Menu', () => {
-        const {container, debug} = renderRemix(
-            <ThemeProviderOmni company={'pontua'} theme={'light'}>
-                <Menu item={item} open={false}/>
-            </ThemeProviderOmni>
+  it('Teste de Menu', () => {
+    const { container, debug } = renderRemix(
+        <Menu item={item} open={false} />
+    );
+    debug(container)
+    const menu = container.querySelector('div') as HTMLElement;
 
-        );
-        const menu = container.querySelector('div') as HTMLElement;
-
-        expect(menu).toBeInTheDocument();
-    });
-
+    expect(menu).toBeInTheDocument();
+  });
 });
-
-

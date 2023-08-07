@@ -1,6 +1,6 @@
 import fetchMock from 'fetch-mock';
 
-const mockHeroSeries = {
+const mockHeroSerie = {
   code: 200,
   status: 'Ok',
   copyright: '© 2023 MARVEL',
@@ -134,15 +134,15 @@ const mockHeroSeries = {
 
 const enableMock = () => {
   fetchMock.mock({
-    name: 'get-series-by-id',
-    url: new RegExp('/series/series-id'),
+    name: 'get-serie-by-id',
+    url: new RegExp('/serie/serie-id'),
     method: 'GET',
     response: () => {
-      return mockHeroSeries;
+      return mockHeroSerie;
     },
   });
 };
 
-export { mockHeroSeries };
+export { mockHeroSerie };
 
 export default enableMock;
