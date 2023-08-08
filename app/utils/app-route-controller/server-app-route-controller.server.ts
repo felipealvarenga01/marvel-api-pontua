@@ -14,6 +14,9 @@ import type {
 } from '~/server/infra/types';
 import { AppRouteController } from '~/utils/app-route-controller/app-route-controller';
 import type { ServerSpread } from '~/utils/app-route-controller/types';
+import clientConfigMock from '../../../mocks/cache/client-config';
+import i18nMock from '../../../mocks/cache/i18n';
+import tenantMock from '../../../mocks/cache/tenants';
 
 export class ServerAppRouteController extends AppRouteController<ServerSpread> {
   private readonly countryCompany: Tenants;
@@ -44,8 +47,8 @@ export class ServerAppRouteController extends AppRouteController<ServerSpread> {
     const country = 'br';
     const countryKey = country;
     const countryCompany = `${company}-${countryKey}` as Tenants;
-    const tenant = getTenantFromCache(countryCompany);
-    const clientConfigs = getClientConfigFromCache(countryCompany);
+    const tenant = tenantMock[countryCompany];
+    const clientConfigs = clientConfigMock[countryCompany];
 
     super({
       language,
@@ -75,9 +78,10 @@ export class ServerAppRouteController extends AppRouteController<ServerSpread> {
     const country = 'br';
     const countryKey = country;
     const countryCompany = `${company}-${countryKey}` as Tenants;
-    const tenant = await getTenantFromCache(countryCompany);
+    const tenant = tenantMock[countryCompany];
     const language = session.language || tenant.language;
-    const translations = await getI18nFromCache(language);
+    // @ts-ignore
+    const translations = i18nMock[language];
 
     return new ServerAppRouteController({
       language,
