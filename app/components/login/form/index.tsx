@@ -57,6 +57,19 @@ export default function FormLogin({
 
   async function validateLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const validateEmail = inputData?.find(
+      (item) => item.name === 'email',
+    )?.value;
+    const validatePassword = inputData?.find(
+      (item) => item.name === 'password',
+    )?.value;
+
+    if (!validateEmail || !validatePassword) {
+      setMessageLogin('Insira email e senha para continuar');
+
+      return;
+    }
+
     const { token, message } = await new ClientRequestBuilder<{
       token?: string;
       message?: string;

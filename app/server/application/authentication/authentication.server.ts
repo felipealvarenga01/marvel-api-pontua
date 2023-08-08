@@ -6,7 +6,7 @@ type DataProps = {
   value: string;
 };
 
-const validEmail = 'felipe.alvarenga01@yahoo.com.br';
+const validEmail = 'tecnologia@pontua.com.br';
 const validPassword = 'pontua@123';
 
 export default function AuthenticationServer(data: DataProps[]) {
