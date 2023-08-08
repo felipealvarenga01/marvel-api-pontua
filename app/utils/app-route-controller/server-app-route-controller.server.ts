@@ -2,7 +2,6 @@ import type { RedirectFunction } from '@remix-run/server-runtime';
 import { getSession } from '~/server/application/commons/session.server';
 import {
   getClientConfigFromCache,
-  getCountryByKeyFromCache,
   getI18nFromCache,
   getTenantFromCache,
 } from '~/server/infra/global-cache/global-cache';
@@ -43,7 +42,7 @@ export class ServerAppRouteController extends AppRouteController<ServerSpread> {
     const { pathname } = url;
     const company = 'pontua';
     const country = 'br';
-    const countryKey = getCountryByKeyFromCache(country);
+    const countryKey = country;
     const countryCompany = `${company}-${countryKey}` as Tenants;
     const tenant = getTenantFromCache(countryCompany);
     const clientConfigs = getClientConfigFromCache(countryCompany);
@@ -74,7 +73,7 @@ export class ServerAppRouteController extends AppRouteController<ServerSpread> {
 
     const company = 'pontua';
     const country = 'br';
-    const countryKey = getCountryByKeyFromCache(country);
+    const countryKey = country;
     const countryCompany = `${company}-${countryKey}` as Tenants;
     const tenant = await getTenantFromCache(countryCompany);
     const language = session.language || tenant.language;
