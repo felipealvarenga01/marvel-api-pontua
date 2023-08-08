@@ -1,14 +1,17 @@
 import type { ActionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { getInfoComicById } from '~/server/application/get-info-comic/get-info-comic.server';
+import { getInfoHeroes } from '~/server/application/get-info-hero/get-info-heroes.server';
 
 export function loader() {
   throw json({ message: 'Invalid request method' }, { status: 400 });
 }
 
 export async function action({ request }: ActionArgs) {
-  const { comicId } = await request.json();
-  const data = await getInfoComicById({ urlPath: `/comics/${comicId}` });
+  const { limit, offset } = await request.json();
+  const data = await getInfoHeroes({
+    urlPath: '/characters',
+    params: { limit, offset },
+  });
 
   return json(data);
 }

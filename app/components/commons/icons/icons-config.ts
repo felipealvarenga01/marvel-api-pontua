@@ -1,1 +1,1 @@
-export type IconName = 'dashboard' | 'user' | 'logout';
+export type IconName = 'dashboard' | 'user' | 'logout' | 'search' | null;

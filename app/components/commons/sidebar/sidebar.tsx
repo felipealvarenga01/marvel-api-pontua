@@ -3,7 +3,7 @@ import type { IconName } from '~/components/commons/icons/icons-config';
 import { Logo } from '~/components/commons/logo/logo';
 import Menu from '~/components/commons/menu/menu';
 import {
-  DividerSidebar,
+  Divider,
   NavBackground,
   NavContainer,
   SidebarNav,
@@ -30,7 +30,7 @@ export const Sidebar = ({ menuList }: { menuList: ListMenuProperties[] }) => {
             })}
           </SidebarWrap>
         </SidebarNav>
-        <DividerSidebar />
+        <Divider />
         <SidebarNav>
           <SidebarWrap className="menuList">
             <Menu

@@ -2,14 +2,17 @@ import { getInfoMarvel } from '~/server/infra/apis/get-info-marvel';
 
 type InfoHeroesProps = {
   urlPath: string;
-  urlQuerys?: {
-    limit: string;
-    offset: string;
+  params?: {
+    limit?: string;
+    offset?: string;
   };
 };
 
 type ReturnDataMarvel = {
   data: {
+    limit: number;
+    total: number;
+    count: number;
     results: [HeroData];
   };
 };
@@ -31,13 +34,20 @@ type HeroResponse = {
   description: string;
 };
 
+type RequestResponse = {
+  limit: number;
+  total: number;
+  count: number;
+  heroes: HeroResponse[];
+};
+
 export async function getInfoHeroes(
   params: InfoHeroesProps,
-): Promise<HeroResponse[]> {
+): Promise<RequestResponse> {
   const defaultDescription = 'Descrição não informada ou inexistente';
 
   const { data } = (await getInfoMarvel(params)) as ReturnDataMarvel;
-  const { results } = data;
+  const { results, limit, total, count } = data;
 
   const heroes: HeroResponse[] = [];
 
@@ -52,5 +62,5 @@ export async function getInfoHeroes(
     }),
   );
 
-  return heroes;
+  return { heroes, limit, total, count };
 }

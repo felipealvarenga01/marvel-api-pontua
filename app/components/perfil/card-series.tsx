@@ -24,6 +24,7 @@ type SeriesProps = {
 };
 
 const windowRef = typeof window !== 'undefined' ? window : null;
+
 export default function CardSeries({ series }: CardSeriesProps) {
   const [seriesInfos, setSeriesInfos] = useState<SeriesProps[]>();
   const [loadingData, setLoadingData] = useState(false);
@@ -44,7 +45,7 @@ export default function CardSeries({ series }: CardSeriesProps) {
   async function loadSeries() {
     setLoadingData(true);
     const storageData = windowRef?.localStorage.getItem('series');
-    if (storageData) {
+    if (storageData && JSON.parse(storageData).length) {
       setSeriesInfos(JSON.parse(storageData));
       setLoadingData(false);
     }

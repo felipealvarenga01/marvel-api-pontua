@@ -492,6 +492,8 @@ const color = {
   orange500: '#f21a05',
   graybackground: '#f5f6f8',
   gray100: '#eaecf0',
+  gray200: '#D0D5DD',
+  gray300: '#f9fafb',
   gray400: '#B7B7B7',
   gray500: '#777777',
   success: '#50cd89',

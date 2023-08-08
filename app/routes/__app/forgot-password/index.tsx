@@ -17,6 +17,7 @@ export default function ForgotPassword() {
       placeholder: 'Informe seu e-mail',
       icon: userIcon,
       marginbottom: 11,
+      name: 'email',
     },
   ];
 

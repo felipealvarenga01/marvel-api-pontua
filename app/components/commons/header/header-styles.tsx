@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import SearchInput from '~/components/commons/search-input/search-input';
 import { mq } from '~/hooks/use-theme';
 
 export const Header = styled.header`
@@ -41,6 +42,6 @@ export const RightRow = styled.div`
   }
 `;
 
-export const SearchInput = styled.input`
+export const SearchView = styled(SearchInput)`
   width: 400px;
 `;

@@ -43,7 +43,7 @@ export default function CardComics({ comics }: CardComicsProps) {
   async function loadComics() {
     setLoadingData(true);
     const storageData = windowRef?.localStorage.getItem('comics');
-    if (storageData) {
+    if (storageData && JSON.parse(storageData).length) {
       setComicInfos(JSON.parse(storageData));
       setLoadingData(false);
     }
@@ -59,7 +59,7 @@ export default function CardComics({ comics }: CardComicsProps) {
   }
 
   useEffect(() => {
-    loadComics().then();
+    loadComics();
   }, []);
 
   return (
@@ -67,10 +67,7 @@ export default function CardComics({ comics }: CardComicsProps) {
       {loadingData ? (
         <>
           <img src={loading} alt="Carregando" />
-          <p>
-            Esperando a api da marvel retornar os dados...logo logo a espera
-            acaba
-          </p>
+          <p>Carregando nossos herois, logo logo a espera acaba...</p>
         </>
       ) : (
         <GridContainer>

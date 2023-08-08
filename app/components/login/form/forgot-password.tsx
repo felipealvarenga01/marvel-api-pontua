@@ -5,7 +5,7 @@ import { ForgotPasswordContainer, IconButton } from '~/components/login/styles';
 export function ForgotPassword() {
   return (
     <ForgotPasswordContainer>
-      <Link to={'forgot-password'}>
+      <Link to={'/forgot-password'}>
         <IconButton src={question} alt="" />
         <span>Esqueceu a senha?</span>
       </Link>

@@ -3,7 +3,7 @@ import { json } from '@remix-run/node';
 import { getInfoStoryById } from '~/server/application/get-info-story/get-info-story.server';
 
 export function loader() {
-  return json('ok');
+  throw json({ message: 'Invalid request method' }, { status: 400 });
 }
 
 export async function action({ request }: ActionArgs) {

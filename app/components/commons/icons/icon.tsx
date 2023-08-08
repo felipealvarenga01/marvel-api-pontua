@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { FiUser } from 'react-icons/fi';
+import { FiSearch, FiUser } from 'react-icons/fi';
 import type { IconName } from './icons-config';
 
 type Props = {
   className?: string;
-  iconName: IconName;
+  iconName: IconName | React.ReactElement;
 };
 
 const KTIcon: React.FC<Props> = ({ iconName }) => {
@@ -59,6 +59,14 @@ const KTIcon: React.FC<Props> = ({ iconName }) => {
             />
           </svg>,
         );
+        break;
+
+      case 'search':
+        setIcon(<FiSearch />);
+        break;
+
+      default:
+        setIcon(iconName);
         break;
     }
   }, []);

@@ -45,7 +45,7 @@ export default function CardEvents({ events }: CardEventsProps) {
   async function loadEvents() {
     setLoadingData(true);
     const storageData = windowRef?.localStorage.getItem('events');
-    if (storageData) {
+    if (storageData && JSON.parse(storageData).length) {
       setEventsInfos(JSON.parse(storageData));
       setLoadingData(false);
     }

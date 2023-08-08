@@ -5,7 +5,8 @@ export type PagesRoutes =
   | 'home'
   | 'perfil'
   | 'forgot-password'
-  | 'agent-selection';
+  | 'agent-selection'
+  | 'logout';
 
 export type I18nCountry = 'pt-BR';
 

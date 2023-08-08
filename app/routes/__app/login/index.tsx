@@ -7,8 +7,6 @@ import { LoginBackground, LoginContainer } from '~/components/login/styles';
 import entrar from '../../../assets/entrar.svg';
 
 export default function Login() {
-  // const { translate } = useTranslation('pages.login');
-  //<h1>{translate('subtitle')}</h1>
   const title = 'Bem-vindo';
   const description = 'informe as suas credenciais de acesso ao portal';
   const button = {
@@ -21,12 +19,14 @@ export default function Login() {
       placeholder: 'Informe seu e-mail',
       icon: userIcon,
       marginbottom: 23,
+      name: 'email',
     },
     {
       type: 'password',
       placeholder: 'Informe sua senha',
       icon: passwordIcon,
       marginbottom: 11,
+      name: 'password',
     },
   ];
 
