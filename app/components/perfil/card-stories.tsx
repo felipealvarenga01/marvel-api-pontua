@@ -43,7 +43,7 @@ export default function CardStories({ stories }: CardStoriesProps) {
   async function loadStories() {
     setLoadingData(true);
     const storageData = windowRef?.localStorage.getItem('stories');
-    if (storageData) {
+    if (storageData && JSON.parse(storageData).length) {
       setStoryInfos(JSON.parse(storageData));
       setLoadingData(false);
     }

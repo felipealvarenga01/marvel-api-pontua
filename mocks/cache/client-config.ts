@@ -17,6 +17,9 @@ const pontuaBrClientConfig: SetupClient = {
     {
       page: 'agent-selection',
     },
+    {
+      page: 'logout',
+    },
   ],
   featureToggles: {
     shouldRecordFormData: 'sessionStorage',

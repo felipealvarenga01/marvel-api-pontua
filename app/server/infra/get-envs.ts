@@ -8,8 +8,6 @@ function getEnv(envKey: string) {
   return env;
 }
 
-//modelo de exportação de env
-
 export function getMarvelURL() {
   return getEnv('MARVEL_URL');
 }
@@ -25,3 +23,8 @@ export function getMarvelPublicKey() {
 export function getEnvTest() {
   return getEnv('ENV_TEST');
 }
+
+export function getEnvSecretKey() {
+  return getEnv('SECRET_KEY');
+}
+

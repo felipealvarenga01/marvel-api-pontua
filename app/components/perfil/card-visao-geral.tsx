@@ -13,7 +13,7 @@ export default function CardVisaoGeral({
   thumbnail,
 }: {
   name: string;
-  description: string;
+  description?: string;
   thumbnail: string;
 }) {
   return (

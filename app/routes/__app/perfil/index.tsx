@@ -1,6 +1,5 @@
-import type { LoaderArgs } from '@remix-run/node';
-import { redirect } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useNavigate, useSearchParams } from '@remix-run/react';
+import md5 from 'md5';
 import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 import { Container, Content } from '~/components/commons/content/content';
@@ -20,35 +19,72 @@ import {
 } from '~/components/perfil/styles';
 import Tabs from '~/components/tabs/tabs';
 import { useTranslation } from '~/hooks/i18n';
-import { getInfoHeroById } from '~/server/application/get-info-hero/get-info-hero-by-id.server';
+import {
+  getMarvelPrivateKey,
+  getMarvelPublicKey,
+} from '~/server/infra/get-envs';
+import { api } from '~/utils/api';
 
 type LoaderData = {
+  marvelPublicKey: string;
+  timestamp: number;
+  hash: string;
+};
+
+type HeroData = {
+  id: string;
   name: string;
-  description: string;
-  thumbnail: string;
-  comics: any;
-  series: any;
-  stories: any;
-  events: any;
+  description?: string;
+  comics: {
+    items: [];
+  };
+  series: {
+    items: [];
+  };
+  stories: {
+    items: [];
+  };
+  events: {
+    items: [];
+  };
+};
+
+interface ResultsDataMarvel extends HeroData {
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+}
+
+type ReturnDataMarvel = {
+  data: {
+    results: ResultsDataMarvel[];
+  };
 };
 
 const visaoGeral = 'visao-geral';
 const windowRef = typeof window !== 'undefined' ? window : null;
 
-export async function loader(params: LoaderArgs) {
-  const url = new URL(params.request.url).search;
-  const searchParams = new URLSearchParams(url);
-  const agentId = searchParams.get('agentId');
-  if (!agentId) {
-    return redirect('/agent-selection');
-  }
+export async function loader() {
+  const marvelPublicKey = getMarvelPublicKey();
+  const marvelPrivateKey = getMarvelPrivateKey();
+  const timestamp = Number(new Date());
+  const hash = md5(timestamp + marvelPrivateKey + marvelPublicKey);
 
-  return getInfoHeroById({ urlPath: `/characters/${agentId}` });
+  return { marvelPublicKey, timestamp, hash };
 }
 
 export default function Perfil() {
-  const { name, description, thumbnail, comics, stories, series, events } =
-    useLoaderData() as LoaderData;
+  const { marvelPublicKey, hash, timestamp } = useLoaderData() as LoaderData;
+
+  const [name, setName] = useState<string>('');
+  const [description, setDescription] = useState<string | undefined>('');
+  const [thumbnail, setThumbnail] = useState<string>('');
+  const [comics, setComics] = useState<Record<string, []>>({ items: [] });
+  const [stories, setStories] = useState<Record<string, []>>({ items: [] });
+  const [series, setSeries] = useState<Record<string, []>>({ items: [] });
+  const [events, setEvents] = useState<Record<string, []>>({ items: [] });
+
   const [tabContainer, setTabContainer] = useState<ReactElement<any, any>>();
   const [tabs, setTabs] = useState([
     {
@@ -57,22 +93,22 @@ export default function Perfil() {
       path: visaoGeral,
     },
     {
-      name: 'Comics',
+      name: 'Quadrinhos',
       active: false,
       path: 'comics',
     },
     {
-      name: 'Stories',
+      name: 'Histórias',
       active: false,
       path: 'stories',
     },
     {
-      name: 'Series',
+      name: 'Séries',
       active: false,
       path: 'series',
     },
     {
-      name: 'Events',
+      name: 'Eventos',
       active: false,
       path: 'events',
     },
@@ -80,7 +116,32 @@ export default function Perfil() {
   const [stepActive, setStepActive] = useState(
     windowRef?.localStorage.getItem('stepActive') || visaoGeral,
   );
+
+  const navigate = useNavigate();
   const { translate } = useTranslation('pages.perfil');
+  const [searchParams] = useSearchParams('');
+  const agentId =
+    searchParams.get('agentId') || windowRef?.localStorage.getItem('agentId');
+
+  async function loadAgent() {
+    const response = await api.get(
+      `/characters/${agentId}?apikey=${marvelPublicKey}&hash=${hash}&ts=${String(
+        timestamp,
+      )}`,
+    );
+
+    const { data } = response.data as ReturnDataMarvel;
+
+    const [hero] = data.results;
+    setName(hero.name);
+    setComics(hero.comics);
+    setSeries(hero.series);
+    setStories(hero.stories);
+    setDescription(hero.description);
+    setEvents(hero.events);
+    setThumbnail(`${hero.thumbnail.path}.${hero.thumbnail.extension}`);
+    setStepActive(visaoGeral);
+  }
 
   function selectTabContainer(stepName: string) {
     switch (stepName) {
@@ -125,6 +186,13 @@ export default function Perfil() {
   }
 
   useEffect(() => {
+    if (!agentId) {
+      navigate('/agent-selection');
+    }
+    loadAgent();
+  }, []);
+
+  useEffect(() => {
     windowRef?.localStorage.setItem('stepActive', stepActive);
     const newTabs = tabs;
     let findTabIndex = tabs.findIndex((tab) => tab.path === stepActive);
@@ -133,7 +201,7 @@ export default function Perfil() {
     newTabs[findTabIndex].active = true;
     setTabs(newTabs);
     selectTabContainer(stepActive || '');
-  }, [, stepActive]);
+  }, [, stepActive, name]);
 
   const menuList: ListMenuProperties[] = [
     {

@@ -1,5 +1,5 @@
 {
-  "name": "pontua-api-marvel",
+  "name": "marvel-api-pontua",
   "version": "1.0.0",
   "description": "Teste para vaga de frontend pleno, pela empresa Pontua",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "api",
     "api-marvel"
   ],
-  "author": "Felipe Alvarenga",
+  "author": "Felipe Dias Alvarenga",
   "license": "ISC",
   "scripts": {
     "build": "npm run build:server && npm run build:remix",
@@ -47,8 +47,10 @@
     "@types/cleave.js": "^1.4.7",
     "@types/compression": "^1.7.2",
     "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/md5": "^2.3.2",
     "@types/morgan": "^1.9.4",
+    "axios": "^1.4.0",
     "cleave.js": "^1.6.0",
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
@@ -59,6 +61,7 @@
     "framer-motion": "^10.15.0",
     "https-proxy-agent": "^7.0.0",
     "isbot": "^3.6.12",
+    "jsonwebtoken": "^9.0.1",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "morgan": "^1.10.0",

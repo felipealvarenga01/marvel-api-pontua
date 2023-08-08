@@ -9,8 +9,8 @@ import { ServerRequestBuilder } from '~/server/infra/request-builder';
 type InfoMarvelProps = {
   urlPath: string;
   params?: {
-    limit: string;
-    offset: string;
+    limit?: string;
+    offset?: string;
   };
 };
 

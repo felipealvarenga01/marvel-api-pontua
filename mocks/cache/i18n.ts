@@ -7,7 +7,7 @@ const brazilPages: Pages = {
   },
   home: {
     title: 'Home',
-    subtitle: 'Texto 2',
+    subtitle: 'Agentes',
   },
   perfil: {
     title: 'Perfil',

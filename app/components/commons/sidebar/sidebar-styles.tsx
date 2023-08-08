@@ -4,7 +4,7 @@ import { KTIcon } from '~/components/commons/icons/icon';
 import { mq } from '~/hooks/use-theme';
 
 export const Header = styled.div`
-  height: ${({ theme }) => '60'}px;
+  height: 60px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -88,9 +88,12 @@ export const Icon = styled(KTIcon)`
   font-size: ${({ theme }) => theme.size.standard}px;
 `;
 
-export const DividerSidebar = styled.span`
+export const Divider = styled.span<{
+  marginTop?: number | string;
+  marginBottom?: number | string;
+}>`
   width: 100%;
   border-bottom: 1px solid #ebeff2;
-  margin-top: 8px;
-  margin-bottom: 14px;
+  margin-top: ${({ marginTop }) => (marginTop ? marginTop : 8)}px;
+  margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : 14)}px;
 `;

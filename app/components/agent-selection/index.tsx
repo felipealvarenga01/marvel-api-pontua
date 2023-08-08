@@ -29,6 +29,8 @@ type OptionsData = {
   thumbnail: string;
 };
 
+const windowRef = typeof window !== 'undefined' ? window : null;
+
 export default function FormAgent({
   title,
   description,
@@ -37,9 +39,10 @@ export default function FormAgent({
   const navigate = useNavigate();
   const [agentSelectedId, setAgentSelectedId] = useState<number>();
 
-  function alguma(e: FormEvent<HTMLFormElement>) {
+  function goToPerfil(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (agentSelectedId) {
+      windowRef?.localStorage.setItem('agentId', String(agentSelectedId));
       navigate(`/perfil?agentId=${agentSelectedId}`);
     }
   }
@@ -54,7 +57,7 @@ export default function FormAgent({
         <DescriptionCardLogin marginTop={16} marginBottom={9}>
           {description}
         </DescriptionCardLogin>
-        <Form onSubmit={(e) => alguma(e)}>
+        <Form onSubmit={(e) => goToPerfil(e)}>
           <Select
             options={options}
             agent={(agent) => setAgentSelectedId(agent)}

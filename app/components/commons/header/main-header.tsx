@@ -1,4 +1,4 @@
-import { Header, LeftRow, RightRow } from './header-styles';
+import { Header } from './header-styles';
 
 type User = {
   logo: string;
@@ -7,13 +7,9 @@ type User = {
 
 type MainHeaderProps = {
   user?: User;
+  children?: React.ReactElement;
 };
 
-export const MainHeader: React.FC<MainHeaderProps> = () => {
-  return (
-    <Header>
-      <LeftRow>teste</LeftRow>
-      <RightRow>teste</RightRow>
-    </Header>
-  );
+export const MainHeader: React.FC<MainHeaderProps> = ({ children }) => {
+  return <Header>{children}</Header>;
 };

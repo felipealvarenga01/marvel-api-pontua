@@ -33,6 +33,7 @@ export const ImgLogo = styled.img`
 
 export const ImgBuilding = styled.img`
   width: 614px;
+  padding-bottom: 38px;
 `;
 
 export const CardContainer = styled.div`
@@ -214,4 +215,14 @@ export const ForgotPasswordContainer = styled.div`
   span {
     margin-left: 4px;
   }
+`;
+
+export const Dialog = styled.p`
+  background-color: rgba(242, 26, 5, 0.15);
+  padding: 14px;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: ${({ theme }) => theme.color.orange400};
 `;

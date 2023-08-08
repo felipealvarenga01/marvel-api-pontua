@@ -1,10 +1,8 @@
 import type { LoaderArgs } from '@remix-run/node';
 import { json, redirect } from '@remix-run/node';
-import { useActionData } from '@remix-run/react';
 import { error } from 'console';
 import { ScreenError } from '~/components/commons/error/screen-error';
 import { MainBody } from '~/components/commons/main-body/main-body';
-import { useAppRoute } from '~/hooks/use-app-route';
 import { DeviceDetectProvider } from '~/hooks/use-device-detect';
 import { ThemeProviderOmni } from '~/hooks/use-theme';
 import { getAppRouteServer } from '~/server/application/commons/common.server';
@@ -40,11 +38,6 @@ export async function loader({ request }: LoaderArgs) {
 }
 
 export default function AppLayout() {
-  const {
-    themeConfigs: { company },
-  } = useAppRoute();
-  const actionData = useActionData();
-
   return (
     <ThemeProviderOmni company="pontua" theme="light">
       <DeviceDetectProvider>

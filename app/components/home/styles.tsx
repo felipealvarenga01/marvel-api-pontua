@@ -24,12 +24,11 @@ export const HeroesContainer = styled.div`
   padding-right: 15px;
   gap: 10px;
   grid-template-areas:
-    'card0 card0 card1 card1 card2 card2'
-    'card3 card3 card4 card4 card5 card5'
-    'card6 card6 card6 card7 card7 card7'
-    'card8 card8 card8 card9 card9 card9';
+    'card0 card0 card1 card1 card2 card2 card3 card3'
+    'card4 card4 card5 card5 card6 card6 card7 card7'
+    'card8 card8 card8 card8 card9 card9 card9 card9';
   overflow-y: auto;
-  max-height: calc(100vh - 161px);
+  max-height: calc(100vh - 233px);
   ::-webkit-scrollbar {
     width: 5px;
   }

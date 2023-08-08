@@ -1,7 +1,7 @@
 import { json } from '@remix-run/node';
 
 export function loader() {
-  return json('ok');
+  throw json({ message: 'Invalid request method' }, { status: 400 });
 }
 
 export async function action() {

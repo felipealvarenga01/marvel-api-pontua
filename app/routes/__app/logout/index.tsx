@@ -1,10 +1,13 @@
 import { useNavigate } from '@remix-run/react';
 import { useEffect } from 'react';
 
-export default function Index() {
+const windowRef = typeof window !== 'undefined' ? window : null;
+
+export default function Logout() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    windowRef?.localStorage.clear();
     navigate('/login');
   }, []);
 
