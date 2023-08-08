@@ -14,7 +14,7 @@ import styles from './styles/global.css';
 export const meta: V2_MetaFunction = () => {
   return [
     { charset: 'utf-8' },
-    { title: 'Api Marvel Pontua' },
+    { title: 'Marvel Api Pontua' },
     { viewport: 'width=device-width,initial-scale=1' },
   ];
 };

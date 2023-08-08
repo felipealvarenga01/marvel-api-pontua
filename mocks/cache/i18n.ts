@@ -1,4 +1,4 @@
-import type { Commons, I18n, Pages } from '~/server/infra/types';
+import type { Commons, I18n, Pages } from '../../app/server/infra/types';
 
 const brazilPages: Pages = {
   login: {
