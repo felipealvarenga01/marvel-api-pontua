@@ -6,9 +6,7 @@ import {
   SidebarLabel,
   SubMenuList,
   SubMenuListItem,
-  SubMenuListLink,
 } from '~/components/commons/menu/menu-styles';
-import { ThemeProviderOmni } from '~/hooks/use-theme';
 import { renderRemix } from '../../../../../tests/remix-stub';
 
 describe('Renderização de styles do Menu', () => {
@@ -62,7 +60,10 @@ describe('Renderização de styles do Menu', () => {
   });
 
   it('Teste de HoverSubMenu com propriedade false', () => {
-    const { container } = renderRemix(<SubMenuList subnav={'true'} open />);
+    const { container } = renderRemix(
+      // @ts-ignore
+      <SubMenuList subnav={'true'} open />,
+    );
     const header = container.querySelector('ul') as HTMLElement;
     const computedStyle = window.getComputedStyle(header);
     expect(computedStyle.position).toBe('initial');
@@ -74,6 +75,7 @@ describe('Renderização de styles do Menu', () => {
 
   it('Teste de HoverSubMenu com propriedade false', () => {
     const { container } = renderRemix(
+      // @ts-ignore
       <SubMenuList subnav={'true'} open={false} />,
     );
     const header = container.querySelector('ul') as HTMLElement;
