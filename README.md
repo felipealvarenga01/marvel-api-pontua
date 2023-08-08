@@ -196,6 +196,7 @@ O projeto será iniciado e estará disponível na URL: ```http://localhost:3001`
 # Fluxo da Aplicação 🚀
 
 >Ao realizar o acesso no link da aplicação ```http://localhost:3001```, o usuário será direcionado a tela de login, sendo necessário inserir usuário e senha para poder realizar seu primeiro acesso.
+![image](https://github.com/felipealvarenga01/marvel-api-pontua/assets/80013127/09076670-2df2-4fa4-9bf2-f542f6841376)
 
 ### Usuário para Login:
 
@@ -203,17 +204,18 @@ O projeto será iniciado e estará disponível na URL: ```http://localhost:3001`
 |--------------------------------|----------
 | ```tecnologia@pontua.com.br``` | ```pontua@123```  |
 
->Feito o login, entraremos na página de seleção de agentes, aqui voce precisará escolher o seu personagem favorito e entrar em seu perfil!
-
 >Feito o login, seremos direcionados para a página de seleção de agentes, aqui voce precisará escolher o seu personagem favorito e entrar em seu perfil!
+![image](https://github.com/felipealvarenga01/marvel-api-pontua/assets/80013127/580afeda-7c50-4367-b259-e2e8831b3df9)
 
 >Ao clicar em enviar, escolhemos o nosso agente mais legal! Seremos direcionado para sua página de perfil, onde visualizaremos seu nome, descrição e avatar.
 >> A tela de /Perfil conta com algumas "Abas": ```Visão Geral``` - ```Quadrinhos``` - ```Histórias``` - ```Séries``` - ```Eventos```, todas as abas são clicáveis e apresentam informações pertinentes relacionadas a ela e seu personagem escolhido
-
+![image](https://github.com/felipealvarenga01/marvel-api-pontua/assets/80013127/ccbaeaaa-830d-4835-905b-b10b53b2f28c)
 
 >Botão Home: Direciona para a tela com todos os agentes disponibilizados pela api da Marvel, você poderá fazer uma busca de algum específico através do campo de busca localizado no topo da página, também poderá usar a paginação encontrada no rodapé da página para ver todos os agentes disponíveis. Todos eles sendo possível clicar para ser direcionado a suas informações existentes.
+![image](https://github.com/felipealvarenga01/marvel-api-pontua/assets/80013127/2442e145-e366-4d38-82f5-d044a70aa124)
 
 >Botão Perfil: direciona você para a página do agente escolhido na tela após o login.
+![image](https://github.com/felipealvarenga01/marvel-api-pontua/assets/80013127/f1179876-6b1a-48c3-b038-4809d430a68a)
 
 >Botão Sair: Você será direcionado para a página de login
 
@@ -232,12 +234,16 @@ npm run test
 ```
 >O ```test``` irá realizar uma varredura na aplicação inteira, trazendo um retorno das informações sobre falhas e sucessos dos testes.
 
+![image](https://github.com/felipealvarenga01/marvel-api-pontua/assets/80013127/c3e38495-50dc-4cc3-b2e1-9c2740106314)
 
 
 ```
 npm run test:coverage
 ```
 >O ```test:coverage``` irá realizar uma varredura na aplicação inteira, trazendo um retorno das informações sobre falhas e sucessos dos testes e criar um relatório com dashboard sobre os testes.
+![image](https://github.com/felipealvarenga01/marvel-api-pontua/assets/80013127/e7b5b34a-42b7-4c66-a3bd-8c4ccd8931b3)
+![image](https://github.com/felipealvarenga01/marvel-api-pontua/assets/80013127/a77c4e93-90b1-4d90-9f7a-891db6567bb5)
+
 
 ```
 npm run test:coverage "commons"
