@@ -188,8 +188,11 @@ O projeto será iniciado e estará disponível na URL: ```http://localhost:3001`
 # Tecnologias usadas na Aplicação 📚
 
 
->Colar um print das tecnologias! e descreve-las
->
+> - Istanbul para relatorio de testes unitarios
+> - Playwright para testes de integração (não foi implementado nenhum teste de integração mas está preparado para tal)
+> - Framework remix
+> - Jwtwebtoken e md5 para autenticacao
+> - Emotion-styled-component
 
 ---
 
