@@ -53,10 +53,10 @@ describe('Renderização de styles-home', () => {
     expect(computedStyle.paddingRight).toBe('15px');
     expect(computedStyle.gap).toBe('10px');
     expect(computedStyle.gridTemplateAreas).toBe(
-      "'card0 card0 card1 card1 card2 card2' 'card3 card3 card4 card4 card5 card5' 'card6 card6 card6 card7 card7 card7' 'card8 card8 card8 card9 card9 card9'",
+      "'card0 card0 card1 card1 card2 card2 card3 card3' 'card4 card4 card5 card5 card6 card6 card7 card7' 'card8 card8 card8 card8 card9 card9 card9 card9'",
     );
     expect(computedStyle.overflow).toBe('');
-    expect(computedStyle.maxHeight).toBe('calc(100vh - 161px)');
+    expect(computedStyle.maxHeight).toBe('calc(100vh - 233px)');
     expect(container).toBeInTheDocument();
   });
 

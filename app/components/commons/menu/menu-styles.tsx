@@ -16,7 +16,7 @@ export const SidebarLink = styled(NavLink)`
   }
   & > div > svg {
     width: 20px;
-      height: 20px;
+    height: 20px;
   }
 
   &.active span {
