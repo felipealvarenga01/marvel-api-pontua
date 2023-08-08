@@ -130,47 +130,53 @@ bem como seu nome e imagem;<br>
 
 📌 [Testes Unitários ](#testes-unitários-)
 
-📌 [Tarefas em aberto](#tarefas-em-aberto)
+📌 [Tarefas em aberto](#tarefas-em-aberto-)
 
 📌 [Desenvolvedor](#desenvolvedor-)
 
-📌 [Licença](#licença)
+📌 [Licença](#licença-)
 
 ---
 
 
 # Deploy da Aplicação ☁️
->Breve resumo de onde foi hospedado e o link para acessar!
+Acesse aqui aplicação hospedada na plataforma Vercel
+>https://marvel-api-pontua.vercel.app/login
 ---
 
 # Pré-requisitos 📋
->Para rodar o projeto em sua máquina, é necessário ter o seguinte item instalados:
+>Para rodar o projeto na sua máquina, é necessário ter o seguinte item instalados:
 ```
 Versão Node >= 18
 ```
 
 # Como rodar a Aplicação ▶️
-Em seu terminal, clone o projeto a partir da url do repositório:
+No seu terminal, clone o projeto a partir da url do repositório:
 ```
 git clone https://github.com/felipealvarenga01/marvel-api-pontua.git
 ```
 Entre na pasta do projeto clonado:
 ```
 cd pontua-api-marvel
-> ```
+```
 
 Faça a instalação das dependencias do projeto usando as opções a seguir:
+
 ```
 npm install
 ```
+
+
 ```
 yarn install
 ```
 
 Após a instalação das dependecias, execute a aplicação:
+
 ```
 npm run dev
 ```
+
 ```
 yarn run dev
 ```
@@ -193,9 +199,9 @@ O projeto será iniciado e estará disponível na URL: ```http://localhost:3001`
 
 ### Usuário para Login:
 
-| E-mail  | Password |
-|---------|----------
-| ```felipe.alvarenga01@yahoo.com.br``` | ```pontua@123```  |
+| E-mail                         | Password |
+|--------------------------------|----------
+| ```tecnologia@pontua.com.br``` | ```pontua@123```  |
 
 >Feito o login, entraremos na página de seleção de agentes, aqui voce precisará escolher o seu personagem favorito e entrar em seu perfil!
 
