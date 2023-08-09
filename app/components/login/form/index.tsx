@@ -22,7 +22,10 @@ type InputsProps = {
 };
 type FormLoginProps = {
   inputs?: Array<InputsProps>;
-  title: string;
+  title: {
+    title: string;
+    dot: string;
+  };
   description: string;
   forgotLink?: boolean;
   button: {
@@ -112,8 +115,8 @@ export default function FormLogin({
     <CardContainer>
       <CardLogin>
         <TitleCardLogin>
-          {title}
-          <span>.</span>
+          {title.title}
+          <span>{title.dot}</span>
         </TitleCardLogin>
         <DescriptionCardLogin>{description}</DescriptionCardLogin>
         {messageLogin && <Dialog>{messageLogin}</Dialog>}

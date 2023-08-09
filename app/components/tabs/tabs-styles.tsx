@@ -28,8 +28,13 @@ export const TabsItem = styled.li<{
   font-weight: 600;
   font-size: 16px;
   line-height: 16px;
+  cursor: pointer;
   color: ${({ theme, active }) =>
-    active ? theme.color.primary : theme.color.gray500};
+    active ? theme.color.blue800 : theme.color.gray500};
+
+  :hover {
+    color: ${({ theme }) => theme.color.orange500};
+  }
 `;
 
 export const TabCard = styled.div`

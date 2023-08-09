@@ -7,7 +7,7 @@ import { LoginBackground, LoginContainer } from '~/components/login/styles';
 import entrar from '../../../assets/entrar.svg';
 
 export default function Login() {
-  const title = 'Bem-vindo';
+  const title = { title: 'Bem-vindo', dot: '.' };
   const description = 'informe as suas credenciais de acesso ao portal';
   const button = {
     icon: entrar,

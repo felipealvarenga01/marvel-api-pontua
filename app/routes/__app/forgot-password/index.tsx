@@ -5,10 +5,10 @@ import { LoginBackground, LoginContainer } from '~/components/login/styles';
 import userIcon from '../../../assets/user.svg';
 
 export default function ForgotPassword() {
-  const title = 'Recuperar senha';
+  const title = { title: 'Recuperar senha', dot: ';' };
   const description =
     'Informe o e-mail do seu cadastro. Nós estaremos realizando o envio de um link com as instruções para você redefinir a sua senha.';
-  const recoverTitle = 'Tudo certo';
+  const recoverTitle = { title: 'Tudo certo', dot: '.' };
   const descriptionRecover =
     'Foi enviado um e-mail para você com instruções de como redefinir a sua senha.';
   const inputs = [

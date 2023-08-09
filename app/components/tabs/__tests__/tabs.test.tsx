@@ -43,7 +43,7 @@ describe('Renderização de Tabs', () => {
     expect(computedStyle.fontWeight).toBe('600');
     expect(computedStyle.fontSize).toBe('16px');
     expect(computedStyle.lineHeight).toBe('16px');
-    expect(computedStyle.color).toBe('rgb(119, 119, 119)');
+    expect(computedStyle.color).toBe('rgb(242, 26, 5)');
     expect(container).toBeInTheDocument();
   });
 });
